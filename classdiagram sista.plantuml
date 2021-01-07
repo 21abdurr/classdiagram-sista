@@ -1,0 +1,282 @@
+@startuml
+
+class "tb_disposisi_surat" as e01 {
+id_disposisi:int
+input_teruskan:enum
+catatan:text
+id_surat_in:int
+user_input:int
+--
+  +input():void
+  -edit():void
+  #delete():void
+}
+class "tb_disp_detail_tujuan" as e02 {
+id_disp_detail_tujuan:int
+id_jabatan:int
+id_user:int
+id_disposisi:int
+--
++input():void
+  -edit():void
+  #delete():void
+}
+class "tb_disp_detail_perintah" as e03 {
+id_disp_detail_perintah:int
+id_perintah:int
+id_disposisi:int
+--
+ +input():void
+  -edit():void
+  #delete():void
+}
+
+class "tb_surat_masuk" as e04{
+id_surat_in:int
+no_agenda:int
+kategori:int
+input_pengirim:enum
+pengirim:varchar
+no_surat:varchar
+tgl_surat:date
+perihal:varchar
+isi_ringkas:text
+file_surat:varchar
+sifat_surat:enum
+keterangan:text
+tgl_catat:date
+user_input:int
+--
++input():void
+  -edit():void
+  #delete():void
+}
+
+
+class "tb_kategori_surat" as e05{
+id_kategori:int
+kode_kategori:varchar
+nama_kategori:varchar
+uraian:text
+--
++input():void
+  -edit():void
+  #delete():void
+}
+
+
+class "tb_surat_keluar" as e06{
+id_surat_out:int
+no_agenda:int
+kategori:int
+no_surat:varchar
+tgl_surat:date
+perihal:varchar
+isi_ringkas:text
+tujuan:int
+pengolah:varchar
+file_surat:varchar
+keterangan:text
+tgl_catat:date
+user_input:int
+--  
++input():void
+-edit():void
+#delete():void
+}
+
+class "tb_tujuan_surat" as e07{
+id_tujuan:int
+alamat_tujuan:text
+uraian:text
+--
++input():void
+-edit():void
+#delete():void
+}
+
+
+class "tb_sppd" as e08{
+id_sppd:int
+no_sppd:varchar
+pejabat:int
+maksud:text
+kendaraan:varchar
+tempat_berangkat:varchar
+tempat_tujuan:varchar
+tgl_berangkat:date
+tgl_kembali:date
+kegiatan:int
+tgl_sppd:date
+ttd:int
+keterangan:text
+tgl_catat:date
+user_input:int
+--
+  +input():void
+  -edit():void
+  #delete():void
+}
+
+class "tb_pegawai" as e09{
+id_user:int
+nip:varchar
+nama_lengkap:varchar
+golongan:int
+jabatan:int
+alamat:text
+no_telp:varchar
+email:varchar
+username:varchar
+password:varchar
+level_user:int
+--
+  +input():void
+  -edit():void
+  #delete():void
+}
+
+class "tb_sppd_dasar" as e010{
+id_dasar:int
+uraian:text
+id_sppd:int
+
+  +input():void
+  -edit():void
+  #delete():void
+}
+
+class "tb_sppd_lap_hal" as e011{
+id_lap_hal:int
+uraian:text
+id_kegiatan:int
+--
+  +input():void
+  -edit():void
+  #delete():void
+}
+
+class "tb_sppd_lap_ttd" as e012{
+id_lap_ttd:int
+pgw_mengetahui:int
+tgl_surat:date
+id_kegiatan:int
+--
+  +input():void
+  -edit():void
+  #delete():void
+}
+
+class "tb_sppd_pengikut" as e013{
+id_pengikut:int
+pegawai:int
+uraian:text
+id_pelaksana:int
+id_sppd:int
+--
+  +input():void
+  -edit():void
+  #delete():void
+}
+
+class "tb_sppd_pelaksana" as e014{
+id_pelaksana:int
+pegawai:int
+uraian:text
+id_sppd:int
+--
+  +input():void
+  -edit():void
+  #delete():void
+}
+
+class "tb_jabatan" as e015{
+id_jabatan:int
+nama_jabatan:varchar
+uraian:text
+kode_surat:varchar
+level_jabatan:enum
+parent_jabatan:int
++input():void
+  -edit():void
+  #delete():void
+}
+
+class "tb_disp_perintah" as e016{
+id_disp_perintah : int
+isi_perintah:varchar
+ket:text
+--
++input():void
+  -edit():void
+  #delete():void
+}
+
+class "tb_agenda" as e017{
+-id_agenda:int
+-no_agenda:int
+-tgl_start:date
+-jam_start:varchar
+-tgl_end:date
+-jam_end:varchar
+-perihal_acara:varchar
+-tempat_acara:varchar
+-keterangan:text
+-user_input:int
+--
+  +input():void
+  -edit():void
+  #delete():void
+}
+
+class "tb_golongan" as e018{
+id_gol:int
+kode_gol:varchar
+nama_gol:varchar
+uraian:text
+--
++input():void
+  -edit():void
+  #delete():void
+}
+class "tb_pengirim_surat" as e019{
+id_pengirim:int
+nama_pengirim:varchar
+uraian:text
+--
+  +input():void
+  -edit():void
+  #delete():void
+}
+class "tb_sppd_kegiatan" as e020{
+id_keg:int
+kode_rek:varchar
+nama_keg:varchar
+pptk:int
+bendahara:int
+jumlah_anggaran:double
+keterangan:text
+user_input:int
+--
+  +input():void
+  -edit():void
+  #delete():void
+}
+
+e01 }|--|| e02
+e01 }|--|| e03
+e01 }|--|| e04
+e04 }|--|| e05
+e05 }|--|| e06
+e06 }|--|| e07
+e08 }|--|| e09
+e08 }|--|| e010
+e08 }|--|| e011
+e08 }|--|| e012
+e08 }|--|| e013
+e08 }|--|| e014
+e09 }|--|| e012
+e09 }|--|| e015
+e013 }|--|| e014
+
+@enduml
